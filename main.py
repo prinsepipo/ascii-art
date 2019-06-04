@@ -1,4 +1,5 @@
 from PIL import Image
+import time
 
 
 def get_pixel_matrix(pixel_data):
@@ -32,7 +33,8 @@ def get_ascii_image(brightness_matrix):
             line += ascii_char[int(v)]
         lines.append(line)
 
-    return '\n'.join(lines)
+    # return '\n'.join(lines)
+    return lines
 
 
 IMG_FILE = 'image/003.jpg'
@@ -46,4 +48,8 @@ brightness_matrix = get_brightness_matrix(pixel_matrix)
 ascii_char = "`^\",:;Il!i~+_-?][}{1)(|\\/tfjrxnuvczXYUJCLQ0OZmwqpdbkhao*#MW&8%B@$"
 ascii_image = get_ascii_image(brightness_matrix)
 
-print(ascii_image)
+# print(ascii_image)
+
+for line in ascii_image:
+    time.sleep(0.3)
+    print(line)
