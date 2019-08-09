@@ -1,2 +1,5 @@
 .vscode
-image/
+.venv
+image/*.png
+image/*.jpg
+__pycache__/
