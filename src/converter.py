@@ -1,4 +1,4 @@
-from PIL import Image, ImageDraw, ImageFont
+from PIL import Image
 import time
 
 
@@ -48,11 +48,4 @@ def process_image(imgpath):
 
 def render_image(imgpath):
     ascii_image = process_image(imgpath)
-
-    pil_font = ImageFont.truetype(font='arial.tff', encoding='unic')
-    text_width, text_height = pil_font.getsize(ascii_image)
-
-    canvas = Image.new('RGB', [258, 258], (255, 255, 255))
-    draw = ImageDraw.Draw(canvas)
-    offset = ((258 - text_width) // 2, (258 - text_height) // 2)
-    draw.text(offset, ascii_image, '#000000', pil_font)
+    print(ascii_image)
