@@ -37,7 +37,11 @@ def get_ascii_image(brightness_matrix, width, height):
 def process_image(imgpath):
     IMG_FILE = imgpath
     img = Image.open(IMG_FILE)
-    img = img.resize((258, 258), Image.ANTIALIAS)
+    w, h = img.size
+    if w > h:
+        img = img.resize((600, 200), Image.ANTIALIAS)
+    else:
+        img = img.resize((200, 200), Image.ANTIALIAS)
     width, height = img.size
     pixel_data = list(img.getdata())
     pixel_matrix = get_pixel_matrix(pixel_data, width, height)
