@@ -1,9 +1,8 @@
 from PIL import Image
-import time
 
 
 def get_pixel_matrix(pixel_data, width, height):
-    return [pixel_data[n:n+width] for n in range(0, width * height, width)]
+    return [pixel_data[n:n + width] for n in range(0, width * height, width)]
 
 
 def get_brightness_matrix(pixel_matrix, width, height):
