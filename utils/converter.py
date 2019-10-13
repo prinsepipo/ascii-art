@@ -1,9 +1,9 @@
 from PIL import Image, ImageFont, ImageDraw
 
 
-def render_image(imgpath):
+def convert_image_to_ascii(imgpath):
     ascii_image = process_image(imgpath)
-    ascii_image.show()
+    return ascii_image
 
 
 def process_image(imgpath):
@@ -49,7 +49,11 @@ def get_luminance_matrix(pixel_matrix):
             # We use the general formula for gettig the luminace (or brightness, but not the right word) of a color.
             # There are many formula for getting the luminance of a color depending on the accuarcy you are targeting.
             #  https://en.wikipedia.org/wiki/Luma_(video) read here for more information.
-            r, g, b = pixel_matrix[x][y]
+            if len(pixel_matrix[x][y]) == 3:
+                r, g, b = pixel_matrix[x][y]
+            elif len(pixel_matrix[x][y]) == 4:
+                r, g, b, alpha = pixel_matrix[x][y]
+
             luminance = 0.2162 * r + 0.7152 * g + 0.0722 * b
             row.append(luminance)
         luminance_matrix.append(row)
@@ -91,5 +95,4 @@ def create_image(ascii_matrix, width, height):
 
         posy += 8
 
-    img.save('image/output.png', 'PNG')
     return img
