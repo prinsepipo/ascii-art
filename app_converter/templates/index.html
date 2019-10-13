@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Ascii Art - Image to Ascii converter</title>
+</head>
+
+<body>
+
+    <header>
+        <h1>Ascii-Art</h1>
+        <h4>Convert images to ascii image art.</h4>
+    </header>
+
+    <div>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="file" name="image">
+            <input type="submit" value="submit">
+        </form>
+    </div>
+
+    <div>
+        <h4>Output</h4>
+        <img src="{{ converted_image.url }}" width="480px">
+        <a href="{{ converted_image.url }}" download>Download</a>
+    </div>
+</body>
+
+</html>
