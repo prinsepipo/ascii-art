@@ -44,6 +44,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # Own
+    'app_converter.apps.AppConverterConfig',
+
+    # 3rd party
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -127,23 +133,10 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Media Settings
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
-
-# App management
-OWNED_APPS = [
-    'app_converter.apps.AppConverterConfig',
-]
-
-PLUGINS = [
-    'storages',
-]
-
-INSTALLED_APPS += OWNED_APPS + PLUGINS
 
 
 if not DEBUG:
