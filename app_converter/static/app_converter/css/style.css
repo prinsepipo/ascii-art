@@ -9,8 +9,22 @@ input::-moz-focus-inner {
   border: none;
 }
 
+input {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
 header {
   text-align: center;
+}
+
+#imageDownload {
+  width: 100%;
+  display: block;
+  text-decoration: none;
+  text-align: center;
+  margin-top: 6px;
+  outline: none;
 }
 
 .container {
@@ -94,6 +108,7 @@ header {
 
 .converter-output img {
   max-width: 384px;
+  width: 100%;
 }
 
 .converter-output div {
@@ -116,5 +131,20 @@ header {
   -webkit-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
   margin: 0;
+}
+
+@media only screen and (max-width: 768px) {
+  .container {
+    padding: 12px;
+  }
+  .converter-output {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  .converter-output img {
+    max-width: 240px;
+  }
 }
 /*# sourceMappingURL=style.css.map */

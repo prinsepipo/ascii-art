@@ -70,7 +70,9 @@
                 </div>
                 {% endif %}
             </div>
-
+            {% if converted_image %}
+            <a id="imageDownload" href="{{ converted_image.url }}" download="">Download</a>
+            {% endif %}
         </div>
     </div>
 

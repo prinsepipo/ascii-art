@@ -9,8 +9,21 @@ input::-moz-focus-inner {
   border: none;
 }
 
+input {
+  box-sizing: border-box;
+}
+
 header {
   text-align: center;
+}
+
+#imageDownload {
+  width: 100%;
+  display: block;
+  text-decoration: none;
+  text-align: center;
+  margin-top: 6px;
+  outline: none;
 }
 
 .container {
@@ -91,6 +104,7 @@ header {
 
   img {
     max-width: 384px;
+    width: 100%;
   }
 
   div {
@@ -111,6 +125,20 @@ header {
       left: 50%;
       transform: translate(-50%, -50%);
       margin: 0;
+    }
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .container {
+    padding: 12px;
+  }
+
+  .converter-output {
+    flex-direction: column;
+
+    img {
+      max-width: 240px;
     }
   }
 }
