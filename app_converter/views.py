@@ -17,6 +17,7 @@ def index(request):
             raw_image = RawImage()
             raw_image.image = form.cleaned_data['image']
             raw_image.ascii_characters = form.cleaned_data['ascii_characters']
+            raw_image.filters = form.cleaned_data['filters']
             raw_image.save()
             context['raw_image'] = raw_image.image
             context['converted_image'] = AsciiImage.objects.get(

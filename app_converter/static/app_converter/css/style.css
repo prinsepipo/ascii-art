@@ -21,8 +21,8 @@ header {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   background: #ffffff;
-  -webkit-box-shadow: 3px 3px 6px #222222;
-          box-shadow: 3px 3px 6px #222222;
+  -webkit-box-shadow: 2px 2px 4px #353535;
+          box-shadow: 2px 2px 4px #353535;
 }
 
 .converter-settings {

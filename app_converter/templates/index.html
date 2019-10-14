@@ -19,7 +19,7 @@
     <div class="container">
         <header>
             <h1>Ascii-Art</h1>
-            <p>Convert images to ascii image art.</p>
+            <p>Convert image to ascii image art.</p>
         </header>
 
         <div class="converter-settings">
@@ -35,6 +35,15 @@
                 <div>
                     <label for="{{ form.ascii_characters.id_for_label }}">Ascii Characters: </label>
                     {{ form.ascii_characters }}
+                    <br>
+                    <small>The characters that will be used. For example, you can enter ".v@".</small>
+                </div>
+                <div>
+                    <label for="{{ form.filters.id_for_label }}">Filters: </label>
+                    {{ form.filters }}
+                    <br>
+                    <small>Filters are used for making the image more accurate. <br>
+                        An image has a depending filter, you can just try one or the other.</small>
                 </div>
                 <input type="button" value="Convert" onclick="submitForm(event)">
                 <p id="uploadError">Please upload an image.</p>

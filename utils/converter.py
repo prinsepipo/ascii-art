@@ -6,11 +6,12 @@ class ImageConverter:
     def __init__(self):
         self.input_divisor = 4
         self.output_multiplier = 8
-        self.luminance = (0.2162, 0.7152, 0.0722)
+        self._luminance = (0.2162, 0.7152, 0.0722)
         self.size = 16
         # It's up to you on what ascii characters to be rendered, this factor will affect the accuracy when rendering.
         # Here are some ascii-characters `^".,:;Il!i~+_-?][}{1)(|\/tfjrxnuvczXYUJCLQ0OZmwqpdbkhao*#MW&8%B@$
         self.characters = self.default_characters()
+        self.filter = None
 
     def process_image(self, imgpath):
         img = Image.open(imgpath)
@@ -26,8 +27,8 @@ class ImageConverter:
         width, height = img.size
         pixel_data = list(img.getdata())
         pixel_matrix = self.get_pixel_matrix(pixel_data, width, height)
-        luminance_matrix = self.get_luminance_matrix(pixel_matrix)
-        ascii_matrix = self.get_ascii_matrix(luminance_matrix)
+        processed_matrix = self.get_processed_matrix(pixel_matrix)
+        ascii_matrix = self.get_ascii_matrix(processed_matrix)
 
         # We multiply the width and height by 8 because when outputing the ascii characters
         # the size wont be the same as the pixel size.
@@ -49,34 +50,43 @@ class ImageConverter:
 
         return pixel_matrix
 
-    def get_luminance_matrix(self, pixel_matrix):
-        luminance_matrix = []
+    def get_processed_matrix(self, pixel_matrix):
+        processed_matrix = []
 
         for x in range(len(pixel_matrix)):
             row = []
             for y in range(len(pixel_matrix[x])):
-                # We use the general formula for gettig the luminace (or brightness, but not the right word) of a color.
-                # There are many formula for getting the luminance of a color depending on the accuarcy you are targeting.
-                #  https://en.wikipedia.org/wiki/Luma_(video) read here for more information.
                 pixel = pixel_matrix[x][y]
-                r = pixel[0] * self.luminance[0]
-                g = pixel[1] * self.luminance[1]
-                b = pixel[2] * self.luminance[2]
+                r = pixel[0]
+                g = pixel[1]
+                b = pixel[2]
+                value = None
 
-                luminance = r + g + b
-                row.append(luminance)
-            luminance_matrix.append(row)
+                if self.filter == 'luminosity':
+                    # General formula for gettig the luminance of a color.
+                    # There are many formula for getting the luminance of a color depending on the accuarcy you are targeting.
+                    #  https://en.wikipedia.org/wiki/Luma_(video) read here for more information.
+                    value = (
+                        r * self._luminance[0]) + (g * self._luminance[1]) + (b * self._luminance[2])
+                elif self.filter == 'lightness':
+                    value = (max(r, g, b) + min(r, g, b)) // 2
+                else:
+                    value = (r + g + b) // 3
 
-        return luminance_matrix
+                row.append(value)
 
-    def get_ascii_matrix(self, luminance_matrix):
+            processed_matrix.append(row)
+
+        return processed_matrix
+
+    def get_ascii_matrix(self, processed_matrix):
         ascii_matrix = []
 
-        for x in range(len(luminance_matrix)):
+        for x in range(len(processed_matrix)):
             line = []
-            for y in range(len(luminance_matrix[x])):
+            for y in range(len(processed_matrix[x])):
                 equivalence = (
-                    luminance_matrix[x][y] / 255) * len(self.characters)
+                    processed_matrix[x][y] / 255) * len(self.characters)
                 line.append(self.characters[int(equivalence) - 1])
             ascii_matrix.append(line)
 

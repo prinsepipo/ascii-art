@@ -5,15 +5,19 @@ from django.dispatch import receiver
 from .models import AsciiImage, RawImage
 from utils.converter import ImageConverter
 
+from .choices import FILTER_CHOICES
+
 import uuid
 
 
 @receiver(post_save, sender=RawImage)
 def convert_image(sender, instance, **kwargs):
     fp = instance.image.path
+    mfilter = FILTER_CHOICES[int(instance.filters) - 1][1]
 
     converter = ImageConverter()
     converter.characters = instance.ascii_characters or converter.default_characters()
+    converter.filter = mfilter.lower()
     image = converter.process_image(fp)
     filename = str(uuid.uuid4()) + '.png'
     new_file_path = settings.MEDIA_ROOT + '/converted/' + filename
