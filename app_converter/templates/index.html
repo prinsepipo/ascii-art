@@ -5,33 +5,68 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Ascii Art - Image to Ascii converter</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'app_converter/css/style.css' %}">
+
+    <title>Ascii Art</title>
 </head>
 
 <body>
 
-    <header>
-        <h1>Ascii-Art</h1>
-        <h4>Convert images to ascii image art.</h4>
-    </header>
+    <div class="container">
+        <header>
+            <h1>Ascii-Art</h1>
+            <p>Convert images to ascii image art.</p>
+        </header>
 
-    <div>
-        <form method="POST" enctype="multipart/form-data">
-            {% csrf_token %}
-            {{ form }}
-            <input type="submit" value="Submit">
-        </form>
+        <div class="converter-settings">
+            <form id="uploadForm" method="POST" enctype="multipart/form-data" autocomplete="off">
+                {% csrf_token %}
+                <div class="fileupload-buttonbar">
+                    <label for="{{ form.image.id_for_label }}">Upload Image</label>
+                    {{ form.image }}
+                    <p>Filename: <span id="imageFileName"></span></p>
+                </div>
+                <hr>
+                <p>Converter Settings</p>
+                <div>
+                    <label for="{{ form.ascii_characters.id_for_label }}">Ascii Characters: </label>
+                    {{ form.ascii_characters }}
+                </div>
+                <input type="button" value="Convert" onclick="submitForm(event)">
+                <p id="uploadError">Please upload an image.</p>
+            </form>
+        </div>
+
+        <div>
+            <h4>Output</h4>
+            <div class="converter-output">
+                {% if raw_image and converted_image %}
+                <div class="raw">
+                    <a href="{{ raw_image.url }}" target="_blank">
+                        <img src="{{ raw_image.url }}" alt="{{ raw_image.name }}">
+                    </a>
+                </div>
+                <div class="converted">
+                    <a href="{{ converted_image.url }}" target="_blank">
+                        <img src="{{ converted_image.url }}" alt="{{ converted_image.name }}">
+                    </a>
+                </div>
+                {% else %}
+                <div class="no-img">
+                    <p>Images will be displayed here.</p>
+                </div>
+                {% endif %}
+            </div>
+
+        </div>
     </div>
 
-    <div>
-        <h4>Output</h4>
-        <a href="{{ raw_image.url }}" target="_blank">
-            <img src="{{ raw_image.url }}" alt="" width="480px">
-        </a>
-        <a href="{{ converted_image.url }}" target="_blank">
-            <img src="{{ converted_image.url }}" width="480px">
-        </a>
-    </div>
+
+    <script src="{% static 'app_converter/js/script.js' %}"></script>
 </body>
 
 </html>
