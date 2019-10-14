@@ -12,7 +12,7 @@ import uuid
 
 @receiver(post_save, sender=RawImage)
 def convert_image(sender, instance, **kwargs):
-    fp = instance.image.path
+    fp = instance.image.url
     mfilter = FILTER_CHOICES[int(instance.filters) - 1][1]
 
     converter = ImageConverter()
