@@ -11,6 +11,11 @@ v = {editable = true,version = "*"}
 [packages]
 pillow = "*"
 django = "*"
+python-decouple = "*"
+dj-database-url = "*"
+boto3 = "*"
+django-storages = "*"
+whitenoise = "*"
 
 [requires]
 python_version = "3.7"
