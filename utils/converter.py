@@ -95,7 +95,7 @@ class ImageConverter:
     def create_image(self, ascii_matrix, width, height):
         img = Image.new('RGB', (width, height), 'WHITE')
         draw = ImageDraw.Draw(img)
-        font = ImageFont.truetype('UbuntuMono-R.ttf', self.size)
+        font = ImageFont.truetype('arial.ttf', self.size)
 
         posx = 0
         posy = 0
