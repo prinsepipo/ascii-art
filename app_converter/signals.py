@@ -21,7 +21,7 @@ def convert_image(sender, instance, **kwargs):
     mfilter = FILTER_CHOICES[int(instance.filters) - 1][1]
 
     converter = ImageConverter()
-    converter.characters = instance.ascii_characters or converter.default_characters()
+    converter.characters = instance.ascii_characters or '.@'
     converter.filter = mfilter.lower()
     image = converter.process_image(fp)
     filename = str(uuid.uuid4()) + '.png'

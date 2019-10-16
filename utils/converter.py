@@ -95,13 +95,12 @@ class ImageConverter:
     def create_image(self, ascii_matrix, width, height):
         img = Image.new('RGB', (width, height), 'WHITE')
         draw = ImageDraw.Draw(img)
-        font = ImageFont.truetype('arial.ttf', self.size)
 
         posx = 0
         posy = 0
         for y in range(len(ascii_matrix)):
             for x in range(len(ascii_matrix[y])):
-                draw.text((posx, posy), ascii_matrix[y][x], (0, 0, 0), font)
+                draw.text((posx, posy), ascii_matrix[y][x], (0, 0, 0))
 
                 posx += self.size // 2
 
