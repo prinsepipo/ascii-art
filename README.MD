@@ -2,21 +2,18 @@
 
 Convert regular images to ascii.
 
+
 ## Gallery
 
 <img src='samples/1.jpg' alt='1.jpg' width=360 />
 <img src='samples/1(ascii).jpg' alt='1(ascii).jpg' width=360 />
-<br />
-<img src='samples/2.jpg' alt='2.jpg' width=360 />
-<img src='samples/2(ascii).jpg' alt='2(ascii).jpg' width=360 />
-<br />
-<img src='samples/3.jpg' alt='3.jpg' width=360 />
-<img src='samples/3(ascii).jpg' alt='3(ascii).jpg' width=360 />
+
 
 ## Technologies
 
 - [Python3](https://www.python.org/)
 - [Pillow](https://python-pillow.org/) v8.1.0
+
 
 ## Usage
 
