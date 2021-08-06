@@ -5,8 +5,7 @@ Convert regular images to ascii.
 
 ## Gallery
 
-<img src='samples/1.jpg' alt='1.jpg' width=360 />
-<img src='samples/1(ascii).jpg' alt='1(ascii).jpg' width=360 />
+<img src='samples/1.jpg' alt='1.jpg' width=360 /> <img src='samples/1(ascii).jpg' alt='1(ascii).jpg' width=360 />
 
 
 ## Technologies
